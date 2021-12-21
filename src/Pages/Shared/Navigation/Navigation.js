@@ -32,7 +32,6 @@ const Navigation = () => {
                 <FaTags /> Products
               </Nav.Link>
               <NavDropdown title="Catecogies" id="basic-nav-dropdown">
-                <FaTags />
                 <NavDropdown.Item href="#action/3.1">
                   Electronic
                 </NavDropdown.Item>
