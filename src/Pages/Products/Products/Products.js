@@ -11,9 +11,9 @@ const Products = () => {
   }, []);
   return (
     <>
-      <section className="all__products mt-5">
+      <section className="mt-5">
         <Container>
-          <Row xs={1} md={2} lg={3} className="gy-5">
+          <Row className="gy-5">
             {products.map((product) => (
               <Product key={product._id} product={product} />
             ))}
