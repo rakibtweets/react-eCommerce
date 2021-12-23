@@ -8,8 +8,11 @@ import {
   FaTags,
   FaUser,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
 
 const Navigation = () => {
+  const { user, userLogOut } = useAuth();
   return (
     <>
       <Navbar
@@ -26,8 +29,10 @@ const Navigation = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#products">
+              <Nav.Link as={Link} to="/home">
+                Home
+              </Nav.Link>
+              <Nav.Link as={Link} to="/products">
                 {' '}
                 <FaTags /> Products
               </Nav.Link>
@@ -49,16 +54,34 @@ const Navigation = () => {
                 <FaSearchLocation />
                 Tracking
               </Nav.Link>
-            </Nav>
-            <Nav className="ms-auto">
-              <Nav.Link href="#login">
-                <FaSignInAlt /> Login
-              </Nav.Link>
-              <Nav.Link href="#register">
-                <FaUser />
-                Register
+              <Nav.Link as={Link} to="/dashboard">
+                {' '}
+                DashBoard
               </Nav.Link>
             </Nav>
+            {!user.email ? (
+              <Nav className="ms-auto">
+                <Nav.Link as={Link} to="/login">
+                  <FaSignInAlt /> Login
+                </Nav.Link>
+                <Nav.Link href="#register">
+                  <FaUser />
+                  Register
+                </Nav.Link>
+              </Nav>
+            ) : (
+              <Nav className="text-center d-lg-flex align-items-lg-center">
+                <Nav.Link className="mx-2">
+                  {user?.displayName}{' '}
+                  <button
+                    onClick={userLogOut}
+                    className="btn btn-danger text-white rounded-pill px-3 py-1"
+                  >
+                    Log Out
+                  </button>
+                </Nav.Link>
+              </Nav>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
